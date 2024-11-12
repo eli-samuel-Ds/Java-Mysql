@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;conecionMysqlAgendaJava&apos;&#x0D;&#x0A;- Original project: &apos;conecionMysqlAgendaJava&apos;&#x0D;&#x0A;- Original element: &apos;conecionMysqlAgendaJava/src/conecionMysqlAgendaJava.Clases&apos;" description="Delete element" element1="/src&lt;conecionMysqlAgendaJava.Clases" element2="/src&lt;conecionMysqlAgendaJava" elements="2" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1731437747735" subPackages="false" version="1.0"/>
+</session>
