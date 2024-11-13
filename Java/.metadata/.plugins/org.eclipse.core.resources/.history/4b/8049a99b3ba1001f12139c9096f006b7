@@ -1,0 +1,161 @@
+package GUI;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.Window.Type;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JMenuBar;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JTable;
+
+public class gestorAgenda {
+
+	private JFrame frmAgenda;
+	private JTextField textFieldNombreEvento;
+	private JTextField textFieldMatriculaEvento;
+	private JTextField textFieldDescripcion;
+	private JTable table;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					gestorAgenda window = new gestorAgenda();
+					window.frmAgenda.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public gestorAgenda() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmAgenda = new JFrame();
+		frmAgenda.setTitle("Agenda");
+		frmAgenda.setResizable(false);
+		frmAgenda.setType(Type.UTILITY);
+		frmAgenda.setBounds(100, 100, 911, 700);
+		frmAgenda.setLocationRelativeTo(null);
+		frmAgenda.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel panelPrincipal = new JPanel();
+		panelPrincipal.setForeground(new Color(0, 0, 0));
+		panelPrincipal.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+		panelPrincipal.setBackground(new Color(112, 128, 144));
+		frmAgenda.getContentPane().add(panelPrincipal, BorderLayout.CENTER);
+		panelPrincipal.setLayout(null);
+
+		JLabel lblNewLabelTituloAgenda = new JLabel(" Agenda Eventos ");
+		lblNewLabelTituloAgenda.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		lblNewLabelTituloAgenda.setForeground(new Color(0, 0, 0));
+		lblNewLabelTituloAgenda.setFont(new Font("Dubai", Font.BOLD, 50));
+		lblNewLabelTituloAgenda.setBounds(260, 32, 376, 69);
+		panelPrincipal.add(lblNewLabelTituloAgenda);
+
+		JPanel panelAgregarEditar = new JPanel();
+		panelAgregarEditar.setBackground(new Color(47, 79, 79));
+		panelAgregarEditar.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		panelAgregarEditar.setBounds(31, 140, 835, 102);
+		panelPrincipal.add(panelAgregarEditar);
+		panelAgregarEditar.setLayout(null);
+
+		JLabel lblNewLabelNombreEvento = new JLabel("Nombre: ");
+		lblNewLabelNombreEvento.setForeground(new Color(0, 0, 0));
+		lblNewLabelNombreEvento.setFont(new Font("Dubai", Font.BOLD, 20));
+		lblNewLabelNombreEvento.setBounds(20, 17, 96, 29);
+		panelAgregarEditar.add(lblNewLabelNombreEvento);
+
+		textFieldNombreEvento = new JTextField();
+		textFieldNombreEvento.setBounds(109, 17, 218, 29);
+		panelAgregarEditar.add(textFieldNombreEvento);
+		textFieldNombreEvento.setColumns(10);
+
+		JLabel lblNewLabelMatricualEvento = new JLabel("Matricula: ");
+		lblNewLabelMatricualEvento.setForeground(Color.BLACK);
+		lblNewLabelMatricualEvento.setFont(new Font("Dubai", Font.BOLD, 20));
+		lblNewLabelMatricualEvento.setBounds(20, 56, 96, 29);
+		panelAgregarEditar.add(lblNewLabelMatricualEvento);
+
+		textFieldMatriculaEvento = new JTextField();
+		textFieldMatriculaEvento.setColumns(10);
+		textFieldMatriculaEvento.setBounds(119, 56, 208, 29);
+		panelAgregarEditar.add(textFieldMatriculaEvento);
+
+		JLabel lblNewLabelDescripcionEvento = new JLabel("Descripcion: ");
+		lblNewLabelDescripcionEvento.setForeground(Color.BLACK);
+		lblNewLabelDescripcionEvento.setFont(new Font("Dubai", Font.BOLD, 20));
+		lblNewLabelDescripcionEvento.setBounds(343, 17, 117, 29);
+		panelAgregarEditar.add(lblNewLabelDescripcionEvento);
+
+		textFieldDescripcion = new JTextField();
+		textFieldDescripcion.setColumns(10);
+		textFieldDescripcion.setBounds(470, 17, 343, 29);
+		panelAgregarEditar.add(textFieldDescripcion);
+
+		JButton btnNewButtonAgregarEvento = new JButton("AGREGAR EVENTO");
+		btnNewButtonAgregarEvento.setFont(new Font("Dubai", Font.BOLD, 20));
+		btnNewButtonAgregarEvento.setBounds(341, 56, 472, 29);
+		panelAgregarEditar.add(btnNewButtonAgregarEvento);
+
+		JLabel lblNewLabelTituloAgregarEditar = new JLabel("AGREGAR E EDITAR");
+		lblNewLabelTituloAgregarEditar.setForeground(new Color(0, 0, 0));
+		lblNewLabelTituloAgregarEditar.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		lblNewLabelTituloAgregarEditar.setBounds(31, 113, 234, 29);
+		panelPrincipal.add(lblNewLabelTituloAgregarEditar);
+
+		JScrollPane scrollPaneTablaEventos = new JScrollPane();
+		scrollPaneTablaEventos.setBorder(new LineBorder(new Color(0, 0, 0), 4));
+		scrollPaneTablaEventos.setBounds(44, 250, 804, 386);
+		panelPrincipal.add(scrollPaneTablaEventos);
+
+		JMenuBar menuBarCrud = new JMenuBar();
+		scrollPaneTablaEventos.setColumnHeaderView(menuBarCrud);
+
+		JMenu mnNewMenuEditar = new JMenu("EDITAR");
+		menuBarCrud.add(mnNewMenuEditar);
+
+		JMenuItem mntmNewMenuItemEditacion = new JMenuItem("EDITACION");
+		mnNewMenuEditar.add(mntmNewMenuItemEditacion);
+
+		JMenu mnNewMenuBorrar = new JMenu("BORRAR");
+		menuBarCrud.add(mnNewMenuBorrar);
+
+		JMenuItem mntmNewMenuItemBorracion = new JMenuItem("BORRACION");
+		mnNewMenuBorrar.add(mntmNewMenuItemBorracion);
+
+		JMenu mnNewMenuBuscar = new JMenu("BUSCAR");
+		menuBarCrud.add(mnNewMenuBuscar);
+
+		JMenuItem mntmNewMenuItemBuscacion = new JMenuItem("BUSCACION");
+		mnNewMenuBuscar.add(mntmNewMenuItemBuscacion);
+
+		JPanel panel = new JPanel();
+		scrollPaneTablaEventos.setViewportView(panel);
+
+		table = new JTable();
+		panel.add(table);
+	}
+}

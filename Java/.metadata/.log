@@ -49,3 +49,220 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2024-11-12 16:33:55.786 -----------------------------------------------
+eclipse.buildId=4.32.0.20240606-1231
+java.version=22.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY ch.qos.logback.classic 1 0 2024-11-12 16:33:59.037
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-11-12 16:34:07.385
+!MESSAGE Logback config file: C:\Users\sreli\OneDrive\Desktop\Clases_Itla\Clases\cuatrimestre_3\p1\tareaHacer\tareaBaseDatos\Java\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.6.1.20240411-1122.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-12 16:34:18.786
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\sreli'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.ui.ide 4 4 2024-11-12 16:53:56.779
+!MESSAGE Not properly disposed SWT resource
+!STACK 0
+java.lang.Error: SWT Resource was not properly disposed
+	at org.eclipse.swt.graphics.Resource.initNonDisposeTracking(Resource.java:172)
+	at org.eclipse.swt.graphics.Resource.<init>(Resource.java:120)
+	at org.eclipse.swt.graphics.Font.<init>(Font.java:162)
+	at org.eclipse.wb.core.editor.color.CustomColorPickerComposite.previewComposite(CustomColorPickerComposite.java:101)
+	at org.eclipse.wb.core.editor.color.CustomColorPickerComposite.createContent(CustomColorPickerComposite.java:70)
+	at org.eclipse.wb.core.editor.color.CustomColorPickerComposite.<init>(CustomColorPickerComposite.java:56)
+	at org.eclipse.wb.internal.swing.model.property.editor.color.ColorPropertyEditor$ColorDialog.addPages(ColorPropertyEditor.java:294)
+	at org.eclipse.wb.internal.core.utils.ui.dialogs.color.AbstractColorDialog.createDialogArea(AbstractColorDialog.java:119)
+	at org.eclipse.jface.dialogs.Dialog.createContents(Dialog.java:766)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.dialogs.Dialog.create(Dialog.java:1092)
+	at org.eclipse.wb.internal.core.utils.ui.dialogs.ReusableDialog.open(ReusableDialog.java:42)
+	at org.eclipse.wb.internal.swing.model.property.editor.color.ColorPropertyEditor.openDialog(ColorPropertyEditor.java:225)
+	at org.eclipse.wb.internal.swing.model.property.editor.color.ColorPropertyEditor$1.onClick(ColorPropertyEditor.java:86)
+	at org.eclipse.wb.internal.core.model.property.editor.presentation.ButtonPropertyEditorPresentationImpl.lambda$3(ButtonPropertyEditorPresentationImpl.java:116)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:91)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4285)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1160)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4083)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3673)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1042)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:152)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:639)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:546)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:208)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:143)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:109)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:439)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:271)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:668)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:605)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1481)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1454)
+!SESSION 2024-11-12 16:54:02.305 -----------------------------------------------
+eclipse.buildId=4.32.0.20240606-1231
+java.version=22.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY ch.qos.logback.classic 1 0 2024-11-12 16:54:05.396
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-11-12 16:56:29.384
+!MESSAGE Logback config file: C:\Users\sreli\OneDrive\Desktop\Clases_Itla\Clases\cuatrimestre_3\p1\tareaHacer\tareaBaseDatos\Java\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.6.1.20240411-1122.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-12 16:56:38.828
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\sreli'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2024-11-13 08:48:58.564 -----------------------------------------------
+eclipse.buildId=4.32.0.20240606-1231
+java.version=22.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY ch.qos.logback.classic 1 0 2024-11-13 08:49:04.452
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-11-13 08:49:20.245
+!MESSAGE Logback config file: C:\Users\sreli\OneDrive\Desktop\Clases_Itla\Clases\cuatrimestre_3\p1\tareaHacer\tareaBaseDatos\Java\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.6.1.20240411-1122.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-13 08:49:35.959
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\sreli'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.wb.core 4 4 2024-11-13 08:55:33.867
+!MESSAGE Designer [1.18.0.202410041926.202411130855]: 205 (Unable to parse source.). 
+		panel.setLayout(new com.jgoodies.forms.layout.FormLayout()); line: 26 The method initialize() from the type gestorAgenda is never used locally
+line: 41 The type com.jgoodies.forms.layout.FormLayout is not accessible
+!STACK 0
+org.eclipse.wb.internal.core.utils.exception.DesignerException: 205 (Unable to parse source.). 
+		panel.setLayout(new com.jgoodies.forms.layout.FormLayout()); line: 26 The method initialize() from the type gestorAgenda is never used locally
+line: 41 The type com.jgoodies.forms.layout.FormLayout is not accessible
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.parseStatement(AstParser.java:161)
+	at org.eclipse.wb.internal.core.utils.ast.AstEditor.addStatement(AstEditor.java:1609)
+	at org.eclipse.wb.internal.core.model.generation.statement.AbstractInsideStatementGenerator.add(AbstractInsideStatementGenerator.java:81)
+	at org.eclipse.wb.internal.core.model.generation.statement.PureFlatStatementGenerator.add(PureFlatStatementGenerator.java:45)
+	at org.eclipse.wb.internal.core.model.JavaInfoUtils.add(JavaInfoUtils.java:1390)
+	at org.eclipse.wb.internal.core.model.JavaInfoUtils.add(JavaInfoUtils.java:1293)
+	at org.eclipse.wb.internal.swing.model.component.ContainerInfo.setLayout(ContainerInfo.java:430)
+	at org.eclipse.wb.internal.swing.model.component.ContainerInfo$5.runEx(ContainerInfo.java:205)
+	at org.eclipse.wb.internal.core.model.util.ObjectInfoAction$1$1.run(ObjectInfoAction.java:70)
+	at org.eclipse.wb.internal.core.utils.execution.ExecutionUtils.run(ExecutionUtils.java:328)
+	at org.eclipse.wb.internal.core.model.util.ObjectInfoAction$1.run(ObjectInfoAction.java:67)
+	at org.eclipse.wb.internal.core.utils.execution.ExecutionUtils.runLog(ExecutionUtils.java:108)
+	at org.eclipse.wb.internal.core.model.util.ObjectInfoAction.run(ObjectInfoAction.java:63)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:581)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:415)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:91)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4285)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1160)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4083)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3673)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1042)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:152)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:639)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:546)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:208)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:143)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:109)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:439)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:271)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:668)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:605)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1481)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1454)
+Caused by: org.eclipse.wb.internal.core.utils.exception.DesignerException: 205 (Unable to parse source.). package GUI;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import java.awt.Window.Type;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JMenuBar;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+class gestorAgenda {
+javax.swing.JFrame frmAgenda=(javax.swing.JFrame) null;
+javax.swing.JTextField textFieldNombreEvento=(javax.swing.JTextField) null;
+javax.swing.JTextField textFieldMatriculaEvento=(javax.swing.JTextField) null;
+javax.swing.JTextField textFieldDescripcion=(javax.swing.JTextField) null;
+javax.swing.JTable table=(javax.swing.JTable) null;
+public static void main(String[] args) {}
+private void initialize() {}
+gestorAgenda(Object __wbp_param) {
+super();javax.swing.JPanel panelPrincipal = (javax.swing.JPanel) null;
+javax.swing.JLabel lblNewLabelTituloAgenda = (javax.swing.JLabel) null;
+javax.swing.JPanel panelAgregarEditar = (javax.swing.JPanel) null;
+javax.swing.JLabel lblNewLabelNombreEvento = (javax.swing.JLabel) null;
+javax.swing.JLabel lblNewLabelMatricualEvento = (javax.swing.JLabel) null;
+javax.swing.JLabel lblNewLabelDescripcionEvento = (javax.swing.JLabel) null;
+javax.swing.JButton btnNewButtonAgregarEvento = (javax.swing.JButton) null;
+javax.swing.JLabel lblNewLabelTituloAgregarEditar = (javax.swing.JLabel) null;
+javax.swing.JScrollPane scrollPaneTablaEventos = (javax.swing.JScrollPane) null;
+java.lang.String[] columnNames = (java.lang.String[]) null;
+javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) null;
+javax.swing.JPanel panel = (javax.swing.JPanel) null;
+
+		panel.setLayout(new com.jgoodies.forms.layout.FormLayout());}
+} line: 26 The method initialize() from the type gestorAgenda is never used locally
+line: 41 The type com.jgoodies.forms.layout.FormLayout is not accessible
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.findNode(AstParser.java:769)
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.parseStatement(AstParser.java:158)
+	... 40 more
+Caused by: org.eclipse.wb.internal.core.utils.check.AssertionFailedException: null argument
+	at org.eclipse.wb.internal.core.utils.check.Assert.fail(Assert.java:225)
+	at org.eclipse.wb.internal.core.utils.check.Assert.isNotNull(Assert.java:174)
+	at org.eclipse.wb.internal.core.utils.check.Assert.isNotNull(Assert.java:159)
+	at org.eclipse.wb.internal.core.utils.ast.AstParser$3.postVisit(AstParser.java:941)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:3342)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChildren(ASTNode.java:3410)
+	at org.eclipse.jdt.core.dom.MethodInvocation.accept0(MethodInvocation.java:228)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:3339)
+	at org.eclipse.jdt.core.dom.ASTNode.acceptChild(ASTNode.java:3387)
+	at org.eclipse.jdt.core.dom.ExpressionStatement.accept0(ExpressionStatement.java:136)
+	at org.eclipse.jdt.core.dom.ASTNode.accept(ASTNode.java:3339)
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.copyBindings(AstParser.java:909)
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.findNode0(AstParser.java:823)
+	at org.eclipse.wb.internal.core.utils.ast.AstParser.findNode(AstParser.java:766)
+	... 41 more

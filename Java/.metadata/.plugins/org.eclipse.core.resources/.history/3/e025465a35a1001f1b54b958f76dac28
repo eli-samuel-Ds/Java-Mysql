@@ -1,0 +1,83 @@
+package GUI;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.Window.Type;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JToolBar;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JScrollBar;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
+import java.awt.Font;
+
+public class gestorAgenda {
+
+	private JFrame frmAgenda;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					gestorAgenda window = new gestorAgenda();
+					window.frmAgenda.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public gestorAgenda() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmAgenda = new JFrame();
+		frmAgenda.setTitle("Agenda");
+		frmAgenda.setResizable(false);
+		frmAgenda.setType(Type.UTILITY);
+		frmAgenda.setBounds(100, 100, 947, 700);
+		frmAgenda.setLocationRelativeTo(null);
+		frmAgenda.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel panelPrincipal = new JPanel();
+		panelPrincipal.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+		panelPrincipal.setBackground(new Color(47, 79, 79));
+		frmAgenda.getContentPane().add(panelPrincipal, BorderLayout.CENTER);
+		panelPrincipal.setLayout(null);
+		
+		JLabel lblNewLabelTituloAgenda = new JLabel(" Agenda Eventos ");
+		lblNewLabelTituloAgenda.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		lblNewLabelTituloAgenda.setForeground(new Color(0, 0, 0));
+		lblNewLabelTituloAgenda.setFont(new Font("Dubai", Font.BOLD, 50));
+		lblNewLabelTituloAgenda.setBounds(278, 32, 376, 69);
+		panelPrincipal.add(lblNewLabelTituloAgenda);
+		
+		JPanel panelAgregarEditar = new JPanel();
+		panelAgregarEditar.setBackground(new Color(47, 79, 79));
+		panelAgregarEditar.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		panelAgregarEditar.setBounds(35, 142, 863, 211);
+		panelPrincipal.add(panelAgregarEditar);
+		
+		JLabel lblNewLabelTituloAgregarEditar = new JLabel("AGREGAR E EDITAR");
+		lblNewLabelTituloAgregarEditar.setForeground(new Color(0, 0, 0));
+		lblNewLabelTituloAgregarEditar.setFont(new Font("Arial Black", Font.PLAIN, 20));
+		lblNewLabelTituloAgregarEditar.setBounds(35, 110, 234, 29);
+		panelPrincipal.add(lblNewLabelTituloAgregarEditar);
+	}
+}
