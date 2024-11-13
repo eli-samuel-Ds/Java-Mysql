@@ -15,17 +15,29 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.awt.GridLayout;
 
-public class gestorAgenda {
+import Clases.ConexionMySQL;
+
+import java.awt.GridLayout;
+import java.awt.HeadlessException;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+
+public class gestorAgendat {
 
 	private JFrame frmAgenda;
 	private JTextField textFieldNombreEvento;
 	private JTextField textFieldMatriculaEvento;
 	private JTextField textFieldDescripcion;
 	private JTable tableEventos;
+	private DefaultTableModel model;  // Modelo de la tabla
 
 	/**
 	 * Launch the application.
@@ -34,7 +46,7 @@ public class gestorAgenda {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gestorAgenda window = new gestorAgenda();
+					gestorAgendat window = new gestorAgendat();
 					window.frmAgenda.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,8 +58,9 @@ public class gestorAgenda {
 	/**
 	 * Create the application.
 	 */
-	public gestorAgenda() {
+	public gestorAgendat() {
 		initialize();
+		cargarEventos();  // Llamamos al método que carga los eventos al iniciar la aplicación
 	}
 
 	/**
@@ -117,6 +130,52 @@ public class gestorAgenda {
 		panelAgregarEditar.add(textFieldDescripcion);
 
 		JButton btnNewButtonAgregarEvento = new JButton("AGREGAR EVENTO");
+		btnNewButtonAgregarEvento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PreparedStatement ps;
+				Connection con = ConexionMySQL.getConexion(); 
+				try {
+					// Consulta SQL para insertar el evento en la base de datos
+					ps = con.prepareStatement("INSERT INTO eventos (nombre, matricula, descripcionEvento) VALUES(?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+					ps.setString(1, textFieldNombreEvento.getText());
+					ps.setString(2, textFieldMatriculaEvento.getText());
+					ps.setString(3, textFieldDescripcion.getText());
+
+					int res = ps.executeUpdate(); // Ejecuta la consulta
+
+					if (res > 0) {
+						// Obtener el ID generado automáticamente
+						ResultSet generatedKeys = ps.getGeneratedKeys();
+						if (generatedKeys.next()) {
+							int idGenerado = generatedKeys.getInt(1); // El ID generado
+
+							// Agregar el evento a la tabla
+							Object[] fila = new Object[4]; // Tamaño 4, ya que tienes 4 columnas en la tabla
+							fila[0] = idGenerado; // Agregar el ID a la fila
+							fila[1] = textFieldNombreEvento.getText();
+							fila[2] = textFieldMatriculaEvento.getText();
+							fila[3] = textFieldDescripcion.getText();
+
+							model.addRow(fila); // Añadir la fila al modelo de la tabla
+						}
+
+						JOptionPane.showMessageDialog(null, "Evento Guardado");
+
+						// Limpiar los campos de texto
+						textFieldNombreEvento.setText("");
+						textFieldMatriculaEvento.setText("");
+						textFieldDescripcion.setText("");
+					} else {
+						JOptionPane.showMessageDialog(null, "Error al Guardar evento");
+					}
+
+					con.close(); // Cerrar conexión
+
+				} catch (HeadlessException | SQLException e1) {
+					System.err.println(e1);
+				}
+			}
+		});
 		btnNewButtonAgregarEvento.setFont(new Font("Dubai", Font.BOLD, 20));
 		btnNewButtonAgregarEvento.setBounds(341, 56, 472, 29);
 		panelAgregarEditar.add(btnNewButtonAgregarEvento);
@@ -132,35 +191,65 @@ public class gestorAgenda {
 		scrollPaneTablaEventos.setBounds(46, 291, 804, 345);
 		panelPrincipal.add(scrollPaneTablaEventos);
 
-		String[] columnNames = {"ID", "Nombre", "Matricula", "Descripcion"};
-		DefaultTableModel model = new DefaultTableModel(columnNames, 0); 
+		String[] columnNames = {"ID","Nombre", "Matricula", "Descripcion"}; // Nombres de las columnas
+		model = new DefaultTableModel(columnNames, 0); 
 		tableEventos = new JTable(model);
 		scrollPaneTablaEventos.setViewportView(tableEventos);
-		
+
 		JPanel panelDelMenu = new JPanel();
 		panelDelMenu.setBounds(31, 252, 835, 29);
 		panelPrincipal.add(panelDelMenu);
 		panelDelMenu.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		panelDelMenu.add(menuBar);
-		
+
 		JMenu mnNewMenuEditar = new JMenu("EDITAR");
 		menuBar.add(mnNewMenuEditar);
-		
+
 		JMenuItem mntmNewMenuItemEditar = new JMenuItem("EDITACION");
 		mnNewMenuEditar.add(mntmNewMenuItemEditar);
-		
+
 		JMenu mnNewMenuBorrar = new JMenu("BORRAR");
 		menuBar.add(mnNewMenuBorrar);
-		
+
 		JMenuItem mntmNewMenuItemBorrar = new JMenuItem("BORRACION");
 		mnNewMenuBorrar.add(mntmNewMenuItemBorrar);
 		
 		JMenu mnNewMenuBuscar = new JMenu("BUSCAR");
 		menuBar.add(mnNewMenuBuscar);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("BUSCACION");
-		mnNewMenuBuscar.add(mntmNewMenuItem_2);
+		JMenuItem mntmNewMenuItemBuscar = new JMenuItem("BUSCACION");
+		mnNewMenuBuscar.add(mntmNewMenuItemBuscar);
+	}
+
+	/**
+	 * Método para cargar los eventos ya existentes desde la base de datos
+	 * y mostrarlos en la tabla.
+	 */
+	private void cargarEventos() {
+		PreparedStatement ps;
+		ResultSet rs;
+		Connection con = ConexionMySQL.getConexion();
+
+		try {
+			ps = con.prepareStatement("SELECT id, nombre, matricula, descripcionEvento FROM eventos");
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				// Añadir cada evento existente a la tabla
+				Object[] fila = new Object[4];
+				fila[0] = rs.getString("id");
+				fila[1] = rs.getString("nombre");
+				fila[2] = rs.getString("matricula");
+				fila[3] = rs.getString("descripcionEvento");
+
+				model.addRow(fila);
+			}
+
+			con.close();
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
 	}
 }

@@ -5,18 +5,33 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexionMySQL {
-    public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/eventos";
-        String usuario = "root";
-        String contraseña = "elis.amuel";
+	public static Connection getConexion() {
+		Connection con = null;
+		String url = "jdbc:mysql://localhost:3306/eventos";  
+		String user = "root"; 
+		String password = "elis.amuel";  
 
-        try {
-            Connection conexion = DriverManager.getConnection(url, usuario, contraseña);
-            System.out.println("Conexión exitosa a la base de datos.");
-            conexion.close();
-        } catch (SQLException e) {
-            System.out.println("Error al conectar a la base de datos.");
-            e.printStackTrace();
-        }
-    }
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver"); 
+			con = DriverManager.getConnection(url, user, password);
+		} catch (ClassNotFoundException | SQLException e) {
+			System.err.println("Error en la conexión: " + e);
+		}
+		return con;
+	}
+
+	public static void main(String[] args) {
+		Connection conexion = getConexion();
+		if (conexion != null) {
+			System.out.println("Conexión exitosa a la base de datos.");
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				System.out.println("Error al cerrar la conexión.");
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("No se pudo establecer la conexión a la base de datos.");
+		}
+	}
 }
