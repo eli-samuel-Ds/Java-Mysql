@@ -8,5 +8,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="com.jgoodies.forms_1.9.0.v20240327-0800.jar"/>
 	<classpathentry kind="lib" path="com.jgoodies.common_1.8.1.v20240327-0800.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sreli/OneDrive/Desktop/Clases_Itla/Clases/cuatrimestre_3/p1/tareaHacer/tareaBaseDatos/MySql/paraConecion( - .jar - )/mysql-connector-j-9.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
