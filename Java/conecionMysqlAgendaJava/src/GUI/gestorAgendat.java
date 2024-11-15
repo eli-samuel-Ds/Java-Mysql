@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Window.Type;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -21,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
 
 import Clases.ConexionMySQL;
 
-import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -37,7 +38,7 @@ public class gestorAgendat {
 	private JTextField textFieldMatriculaEvento;
 	private JTextField textFieldDescripcion;
 	private JTable tableEventos;
-	private DefaultTableModel model;  // Modelo de la tabla
+	private DefaultTableModel model; 
 
 	/**
 	 * Launch the application.
@@ -60,7 +61,7 @@ public class gestorAgendat {
 	 */
 	public gestorAgendat() {
 		initialize();
-		cargarEventos();  // Llamamos al método que carga los eventos al iniciar la aplicación
+		cargarEventos(); 
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class gestorAgendat {
 		frmAgenda.setTitle("Agenda");
 		frmAgenda.setResizable(false);
 		frmAgenda.setType(Type.UTILITY);
-		frmAgenda.setBounds(100, 100, 911, 700);
+		frmAgenda.setBounds(100, 100, 911, 701);
 		frmAgenda.setLocationRelativeTo(null);
 		frmAgenda.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -92,7 +93,7 @@ public class gestorAgendat {
 		JPanel panelAgregarEditar = new JPanel();
 		panelAgregarEditar.setBackground(new Color(47, 79, 79));
 		panelAgregarEditar.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		panelAgregarEditar.setBounds(31, 140, 835, 102);
+		panelAgregarEditar.setBounds(31, 140, 835, 100);
 		panelPrincipal.add(panelAgregarEditar);
 		panelAgregarEditar.setLayout(null);
 
@@ -135,33 +136,30 @@ public class gestorAgendat {
 				PreparedStatement ps;
 				Connection con = ConexionMySQL.getConexion(); 
 				try {
-					// Consulta SQL para insertar el evento en la base de datos
-					ps = con.prepareStatement("INSERT INTO eventos (nombre, matricula, descripcionEvento) VALUES(?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+					ps = con.prepareStatement("INSERT INTO eventos (nombre, matricula, "
+							+ "descripcionEvento) VALUES(?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
 					ps.setString(1, textFieldNombreEvento.getText());
 					ps.setString(2, textFieldMatriculaEvento.getText());
 					ps.setString(3, textFieldDescripcion.getText());
 
-					int res = ps.executeUpdate(); // Ejecuta la consulta
+					int res = ps.executeUpdate(); 
 
 					if (res > 0) {
-						// Obtener el ID generado automáticamente
 						ResultSet generatedKeys = ps.getGeneratedKeys();
 						if (generatedKeys.next()) {
-							int idGenerado = generatedKeys.getInt(1); // El ID generado
+							int idGenerado = generatedKeys.getInt(1);
 
-							// Agregar el evento a la tabla
-							Object[] fila = new Object[4]; // Tamaño 4, ya que tienes 4 columnas en la tabla
-							fila[0] = idGenerado; // Agregar el ID a la fila
+							Object[] fila = new Object[4];
+							fila[0] = idGenerado;
 							fila[1] = textFieldNombreEvento.getText();
 							fila[2] = textFieldMatriculaEvento.getText();
 							fila[3] = textFieldDescripcion.getText();
 
-							model.addRow(fila); // Añadir la fila al modelo de la tabla
+							model.addRow(fila); 
 						}
 
 						JOptionPane.showMessageDialog(null, "Evento Guardado");
 
-						// Limpiar los campos de texto
 						textFieldNombreEvento.setText("");
 						textFieldMatriculaEvento.setText("");
 						textFieldDescripcion.setText("");
@@ -169,7 +167,7 @@ public class gestorAgendat {
 						JOptionPane.showMessageDialog(null, "Error al Guardar evento");
 					}
 
-					con.close(); // Cerrar conexión
+					con.close(); 
 
 				} catch (HeadlessException | SQLException e1) {
 					System.err.println(e1);
@@ -188,45 +186,204 @@ public class gestorAgendat {
 
 		JScrollPane scrollPaneTablaEventos = new JScrollPane();
 		scrollPaneTablaEventos.setBorder(new LineBorder(new Color(0, 0, 0), 4));
-		scrollPaneTablaEventos.setBounds(46, 291, 804, 345);
+		scrollPaneTablaEventos.setBounds(41, 281, 814, 369);
 		panelPrincipal.add(scrollPaneTablaEventos);
 
-		String[] columnNames = {"ID","Nombre", "Matricula", "Descripcion"}; // Nombres de las columnas
+		String[] columnNames = {"ID","Nombre", "Matricula", "Descripcion"}; 
 		model = new DefaultTableModel(columnNames, 0); 
 		tableEventos = new JTable(model);
 		scrollPaneTablaEventos.setViewportView(tableEventos);
 
-		JPanel panelDelMenu = new JPanel();
-		panelDelMenu.setBounds(31, 252, 835, 29);
-		panelPrincipal.add(panelDelMenu);
-		panelDelMenu.setLayout(new GridLayout(0, 1, 0, 0));
-
 		JMenuBar menuBar = new JMenuBar();
-		panelDelMenu.add(menuBar);
-
-		JMenu mnNewMenuEditar = new JMenu("EDITAR");
-		menuBar.add(mnNewMenuEditar);
-
-		JMenuItem mntmNewMenuItemEditar = new JMenuItem("EDITACION");
-		mnNewMenuEditar.add(mntmNewMenuItemEditar);
+		menuBar.setBounds(31,245, 835, 29);
+		panelPrincipal.add(menuBar);
 
 		JMenu mnNewMenuBorrar = new JMenu("BORRAR");
 		menuBar.add(mnNewMenuBorrar);
 
-		JMenuItem mntmNewMenuItemBorrar = new JMenuItem("BORRACION");
+		JMenuItem mntmNewMenuItemBorrar = new JMenuItem("BORRAR");
+		mntmNewMenuItemBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = tableEventos.getSelectedRow(); 
+				if (selectedRow != -1) { 
+					Integer idEvento;
+					try {
+						idEvento = (Integer) model.getValueAt(selectedRow, 0); 
+					} catch (ClassCastException ex) {
+						idEvento = Integer.parseInt((String) model.getValueAt(selectedRow, 0));
+					}
+					int confirm = JOptionPane.showConfirmDialog(null, 
+							"¿Estás seguro de que deseas eliminar este evento?", 
+							"Confirmar eliminación", 
+							JOptionPane.YES_NO_OPTION);
+
+					if (confirm == JOptionPane.YES_OPTION) {
+						PreparedStatement ps;
+						Connection con = ConexionMySQL.getConexion();
+
+						try {
+							ps = con.prepareStatement("DELETE FROM eventos WHERE id = ?");
+							ps.setInt(1, idEvento);
+
+							int res = ps.executeUpdate();  
+
+							if (res > 0) {
+								model.removeRow(selectedRow);
+
+								JOptionPane.showMessageDialog(null, "Evento eliminado correctamente");
+							} else {
+								JOptionPane.showMessageDialog(null, "Error al eliminar el evento");
+							}
+
+							con.close();
+
+						} catch (SQLException ex) {
+							System.err.println(ex);
+						}
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecciona una fila para borrar.");
+				}
+			}
+		});
 		mnNewMenuBorrar.add(mntmNewMenuItemBorrar);
-		
+
+
 		JMenu mnNewMenuBuscar = new JMenu("BUSCAR");
 		menuBar.add(mnNewMenuBuscar);
-		
+
 		JMenuItem mntmNewMenuItemBuscar = new JMenuItem("BUSCACION");
+		mntmNewMenuItemBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String textoBusqueda = JOptionPane.showInputDialog(
+						null,
+						"Ingresa el nombre del evento o matrícula para buscar:",
+						"Buscar Evento",
+						JOptionPane.QUESTION_MESSAGE
+						);
+
+				if (textoBusqueda != null && !textoBusqueda.trim().isEmpty()) {
+					textoBusqueda = textoBusqueda.trim();
+
+					PreparedStatement ps;
+					ResultSet rs;
+					Connection con = ConexionMySQL.getConexion();
+
+					try {
+						ps = con.prepareStatement(
+								"SELECT id, nombre, matricula, descripcionEvento " +
+										"FROM eventos WHERE nombre LIKE ? OR matricula LIKE ?"
+								);
+						ps.setString(1, "%" + textoBusqueda + "%");
+						ps.setString(2, "%" + textoBusqueda + "%");
+						rs = ps.executeQuery();
+
+						model.setRowCount(0);
+
+						boolean encontrado = false;
+						while (rs.next()) {
+							Object[] row = new Object[4];
+							row[0] = rs.getInt("id");
+							row[1] = rs.getString("nombre");
+							row[2] = rs.getString("matricula");
+							row[3] = rs.getString("descripcionEvento");
+
+							model.addRow(row);
+							encontrado = true;
+						}
+
+						if (!encontrado) {
+							JOptionPane.showMessageDialog(null, "No se encontraron eventos "
+									+ "con ese criterio de búsqueda.");
+						}
+
+						con.close();  
+					} catch (SQLException ex) {
+						JOptionPane.showMessageDialog(null, "Error al buscar eventos: " + ex.getMessage());
+						ex.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Por favor, ingresa un texto para buscar.");
+				}
+			}
+		});
+
 		mnNewMenuBuscar.add(mntmNewMenuItemBuscar);
+
+		JMenuItem mntmNewMenuItemVer = new JMenuItem("VEACION");
+		mntmNewMenuItemVer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarEventos();  
+				JOptionPane.showMessageDialog(null, "Se han cargado todos los eventos.");
+			}
+		});
+		mnNewMenuBuscar.add(mntmNewMenuItemVer);
+
+		JPopupMenu popupMenu = new JPopupMenu();
+
+		JMenuItem menuItemEditar = new JMenuItem("Editar");
+		menuItemEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = tableEventos.getSelectedRow();
+				if (selectedRow != -1) {
+					int idEvento = (int) model.getValueAt(selectedRow, 0);
+					String nombre = (String) model.getValueAt(selectedRow, 1);
+					String matricula = (String) model.getValueAt(selectedRow, 2);
+					String descripcion = (String) model.getValueAt(selectedRow, 3);
+
+					JTextField txtNombre = new JTextField(nombre);
+					JTextField txtMatricula = new JTextField(matricula);
+					JTextField txtDescripcion = new JTextField(descripcion);
+
+					Object[] message = {
+							"Nombre:", txtNombre,
+							"Matricula:", txtMatricula,
+							"Descripcion:", txtDescripcion,
+					};
+
+					int option = JOptionPane.showConfirmDialog(
+							null, message, "Editar Evento", JOptionPane.OK_CANCEL_OPTION);
+
+					if (option == JOptionPane.OK_OPTION) {
+						Connection con = ConexionMySQL.getConexion();
+						PreparedStatement ps;
+
+						try {
+							ps = con.prepareStatement("UPDATE eventos SET nombre = ?, "
+									+ "matricula = ?, descripcionEvento = ? WHERE id = ?");
+							ps.setString(1, txtNombre.getText());
+							ps.setString(2, txtMatricula.getText());
+							ps.setString(3, txtDescripcion.getText());
+							ps.setInt(4, idEvento);
+
+							int res = ps.executeUpdate();
+							if (res > 0) {
+								model.setValueAt(txtNombre.getText(), selectedRow, 1);
+								model.setValueAt(txtMatricula.getText(), selectedRow, 2);
+								model.setValueAt(txtDescripcion.getText(), selectedRow, 3);
+
+								JOptionPane.showMessageDialog(null, "Evento actualizado correctamente");
+							} else {
+								JOptionPane.showMessageDialog(null, "Error al actualizar el evento");
+							}
+
+							con.close();
+						} catch (SQLException ex) {
+							JOptionPane.showMessageDialog(null, "Error al actualizar el evento: " + ex.getMessage());
+							ex.printStackTrace();
+						}
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecciona una fila para editar.");
+				}
+			}
+		});
+
+		popupMenu.add(menuItemEditar);
+
+		tableEventos.setComponentPopupMenu(popupMenu);
 	}
 
-	/**
-	 * Método para cargar los eventos ya existentes desde la base de datos
-	 * y mostrarlos en la tabla.
-	 */
 	private void cargarEventos() {
 		PreparedStatement ps;
 		ResultSet rs;
@@ -236,20 +393,24 @@ public class gestorAgendat {
 			ps = con.prepareStatement("SELECT id, nombre, matricula, descripcionEvento FROM eventos");
 			rs = ps.executeQuery();
 
-			while (rs.next()) {
-				// Añadir cada evento existente a la tabla
-				Object[] fila = new Object[4];
-				fila[0] = rs.getString("id");
-				fila[1] = rs.getString("nombre");
-				fila[2] = rs.getString("matricula");
-				fila[3] = rs.getString("descripcionEvento");
+			model.setRowCount(0);
 
-				model.addRow(fila);
+			while (rs.next()) {
+				Object[] row = new Object[4];
+				row[0] = rs.getInt("id");
+				row[1] = rs.getString("nombre");
+				row[2] = rs.getString("matricula");
+				row[3] = rs.getString("descripcionEvento");
+
+				model.addRow(row);
 			}
 
-			con.close();
+			con.close(); 
+
 		} catch (SQLException e) {
-			System.err.println(e);
+			JOptionPane.showMessageDialog(null, "Error al cargar los eventos: " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
+
 }
